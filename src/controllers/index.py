@@ -1,4 +1,4 @@
-def index(environ):
+def index(environ, start_response):
         f = open('src/templates/index.html')
         html = str.encode(f.read())
 
@@ -12,4 +12,5 @@ def index(environ):
             )
             html = str.encode("Hello, %s!"%post['name'].value)
 
-        return html
+        start_response('200 OK', [('Content-Type', 'text/html')])
+        return [html]
