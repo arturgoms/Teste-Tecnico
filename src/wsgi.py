@@ -13,6 +13,7 @@ Todo:
 import src.settings as conf
 from src.controllers.index import (index)
 from src.controllers.error_404 import (error_404)
+from src.controllers.api import (api)
 
 def static(start_response, path, type):
     """
@@ -33,6 +34,9 @@ def router(environ, start_response):
     """
     if environ['PATH_INFO'] == '/':
         return index(environ, start_response)
+
+    elif environ['PATH_INFO'] == '/api':
+        return api(environ, start_response)
 
     elif environ['PATH_INFO'] == '/css/style.css':
         return static(start_response, '/css/style.css', 'css')
