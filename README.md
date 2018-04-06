@@ -27,6 +27,7 @@ Requisitos:
 
 ## Reprodução
 Testado em Ubuntu e MacOS
+
 Clonar o projeto:
 ```
 git clone https://github.com/arturgoms/Teste-Tecnico.git
