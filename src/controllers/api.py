@@ -10,6 +10,7 @@ Todo:
 
 import cgi
 import json
+import src.models.mysql as mysql
 
 def api(environ, start_response):
     """
@@ -20,7 +21,9 @@ def api(environ, start_response):
     if environ['REQUEST_METHOD'] == 'POST':
         html = str.encode(json.dumps({"REQUEST_METHOD": "POST"}))
     else:
-        html = str.encode(json.dumps({"REQUEST_METHOD": "GET"}))
+        db = mysql.MySQL()
+        json_data = db.select('users')
+        html = str.encode(json.dumps(json_data))
 
     start_response('200 OK', [('Content-Type', 'text/json')])
     return [html]

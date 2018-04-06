@@ -4,15 +4,22 @@ $(document).ready(function () {
     var lastTimeResponse = [];
 
     function getRealData() {
-        $.get("api", function(data, status){
-        $("#teste").html(data["REQUEST_METHOD"]);
+        $.get("api", function(dados, status){
+            response = $.parseJSON(dados);
+
+            $(function() {
+            $.each(response, function(i, item) {
+                var $tr = $('<tr>').append(
+                    $('<td>').text(i),
+                    $('<td>').text(item["nome"]),
+                    $('<td>').text(item["sobrenome"]),
+                    $('<td>').text(item["endereco"])
+                ); //.appendTo('#records_table');
+            $("#tabela").append($tr)
+            });
+        });
     });
     }
-
-    //this refreshes data every 2seconds
-    setInterval(getRealData, 1000);
-
-    //call the function to display data
     getRealData();
 
 });

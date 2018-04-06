@@ -57,3 +57,5 @@ Foi utilizado:
 - Python 3.6
 - WSGI - Web Server Gateway Interface (webservice padrão do python)
 - Virtualenv (ambiente virtual pra desenvolver aplicações em python).
+- [Python connector to MySQL (MacOS)](https://dev.mysql.com/downloads/file/?id=472642)
+- [MySQL (MacOS)](https://dev.mysql.com/downloads/file/?id=475582)
