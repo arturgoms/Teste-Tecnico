@@ -23,5 +23,36 @@ Requisitos:
 - Clareza e simplicidade do código
 - Uso das tecnologias citadas acima
 
+---
 
+## Reprodução
 
+Clonar o projeto:
+```
+git clone https://github.com/arturgoms/Teste-Tecnico.git
+```
+
+Entrar na pasta:
+```
+cd Teste-Tecnico
+```
+
+Ativar o Virtualenv:
+```
+. bin/activate
+```
+
+Executar aplicação:
+```
+python manage.py
+```
+
+---
+
+## Sobre o projeto
+
+Foi utilizado:
+
+- Python 3.6
+- WSGI (webservice padrão do python)
+- Virtualenv (ambiente virtual pra desenvolver aplicações em python).
