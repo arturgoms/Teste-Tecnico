@@ -1,4 +1,4 @@
-#!/Users/arturgomes/Documents/Teste-Tecnico/bin/python
+#!/Users/arturgomes/Documents/Teste-Tecnico/venv/bin/python
 
 import sys
 import getopt
