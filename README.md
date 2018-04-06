@@ -55,5 +55,5 @@ python3 manage.py
 Foi utilizado:
 
 - Python 3.6
-- WSGI (webservice padrão do python)
+- WSGI - Web Server Gateway Interface (webservice padrão do python)
 - Virtualenv (ambiente virtual pra desenvolver aplicações em python).
