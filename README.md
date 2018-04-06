@@ -26,7 +26,7 @@ Requisitos:
 ---
 
 ## Reprodução
-
+Testado em Ubuntu e MacOS
 Clonar o projeto:
 ```
 git clone https://github.com/arturgoms/Teste-Tecnico.git
@@ -39,12 +39,12 @@ cd Teste-Tecnico
 
 Ativar o Virtualenv:
 ```
-. bin/activate
+. venv/bin/activate
 ```
 
 Executar aplicação:
 ```
-python manage.py
+python3 manage.py
 ```
 
 ---
