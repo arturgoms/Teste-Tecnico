@@ -1,4 +1,1 @@
-Paste==2.0.3
-pip-save==0.2.0
 six==1.9.0
-WebOb==1.8.0
