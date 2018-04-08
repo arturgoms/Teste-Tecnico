@@ -1,8 +1,5 @@
 $(document).ready(function () {
     homePage();
-    updateTable();
-    setInterval(updateTable, 500);
-
 });
 
 /*
@@ -31,7 +28,7 @@ function updateTable() {
                 $('#alerta').show("fade", { direction: "right" }, 100);
             }
             catch(err) {
-                $('#message').html("<strong>ERROR:</strong> Não foi possível atualizar a tabela");
+                $('#message').html("<strong>ERROR:</strong> Não foi possível atualizar tabela (Servidor Offline)");
                 $('#alerta').show("fade", { direction: "right" }, 100);
             }
         }
@@ -58,10 +55,17 @@ function addField() {
             $("#addSobrenome").val('');
             $("#addEndereco").val('');
             $('#alerta').hide("fade", { direction: "right" }, 100);
+            updateTable();
         },
         error: function(result) {
-            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
-            $('#alerta').show("fade", { direction: "right" }, 100);
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível adicionar campo (Servidor Offline)");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
         }
     });
     return false;
@@ -79,10 +83,17 @@ function deleteField(id){
         },
         success: function (response) {
             $('#alerta').hide("fade", { direction: "right" }, 100);
+            updateTable();
         },
         error: function(result) {
-            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
-            $('#alerta').show("fade", { direction: "right" }, 100);
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível deletar campo (Servidor Offline)");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
         }
     });
 }
@@ -104,8 +115,14 @@ function showUpdateField(id){
             $('#alerta').hide("fade", { direction: "right" }, 100);
         },
         error: function(result) {
-                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
                 $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar campos de edição (Servidor Offline)");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
         }
     });
     
@@ -130,10 +147,17 @@ function updateField(){
         },
         success: function (response) {
             $('#alerta').hide("fade", { direction: "right" }, 100);
+            updateTable();
         },
         error: function(result) {
-            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
-            $('#alerta').show("fade", { direction: "right" }, 100);
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível atualizar campo (Servidor Offline)");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
         }
     });
     $('#updateField').hide("fade", { direction: "right" }, 100);
@@ -151,8 +175,8 @@ function aboutPage(){
             $('#content').html(response);
         },
         error: function(result) {
-                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
-                $('#alerta').show("fade", { direction: "right" }, 100);
+            $('#message').html("<strong>ERROR:</strong> Não foi possível carregar página About (Servidor Offline");
+            $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
     
@@ -167,10 +191,11 @@ function homePage(){
         url: 'index',
         success: function (response) {
             $('#content').html(response);
+            updateTable();
         },
         error: function(result) {
-                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
-                $('#alerta').show("fade", { direction: "right" }, 100);
+            $('#message').html("<strong>ERROR:</strong> Não foi possível carregar página Index (Servidor Offline");
+            $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
     
