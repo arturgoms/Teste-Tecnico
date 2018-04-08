@@ -5,6 +5,9 @@ $(document).ready(function () {
 
 });
 
+/*
+    Função que atualiza os dados da tabela
+*/
 function updateTable() {
     $.ajax({
         type: 'GET',
@@ -34,6 +37,10 @@ function updateTable() {
         }
     });
 }
+
+/*
+    Função que adiciona um contato no banco
+*/
 function addField() {
     var nome = $("#addNome").val();
     var sobrenome = $("#addSobrenome").val();
@@ -60,6 +67,9 @@ function addField() {
     return false;
 }
 
+/*
+    Função que deleta um contato da tabela
+*/
 function deleteField(id){
     $.ajax({
         url: 'api',
@@ -77,6 +87,9 @@ function deleteField(id){
     });
 }
 
+/*
+    Função que mostra os campos para editar um contato
+*/
 function showUpdateField(id){
     $.ajax({
         type: 'GET',
@@ -98,6 +111,9 @@ function showUpdateField(id){
     
 }
 
+/*
+    Função que atualiza um contato específico
+*/
 function updateField(){
     var id = $("#updateId").val();
     var nome = $("#updateNome").val();
@@ -124,6 +140,9 @@ function updateField(){
 return false;
 }
 
+/*
+    Função que carrega o conteúdo da página about
+*/
 function aboutPage(){
     $.ajax({
         type: 'GET',
@@ -138,6 +157,10 @@ function aboutPage(){
     });
     
 }
+
+/*
+    Função que carrega o conteúdo da página index
+*/
 function homePage(){
     $.ajax({
         type: 'GET',

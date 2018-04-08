@@ -19,6 +19,19 @@ th, td {
 tr:hover {
 	background-color:#f5f5f5;
 }
+/* Imagem com borda redonda */
+img {
+    border-radius: 50%;
+}
+/* Link com sublinhado */
+a {
+  text-decoration: none;
+}
+
+/* Alinhamento a esquerda nos ul */
+ul {
+	text-align: left;
+}
 
 /* Estilo dos formulários */
 input{
@@ -136,14 +149,3 @@ body{
     color: black;
 }
 
-img {
-    border-radius: 50%;
-}
-a {
-
-  text-decoration: none;
-}
-
-ul {
-	text-align: left;
-}

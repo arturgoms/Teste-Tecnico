@@ -1,4 +1,4 @@
-""" Index Controller
+""" Layout Controller
 
     Arquivo onde se encontra toda a lógica que rodará na rota '/'
 
@@ -10,8 +10,8 @@ Todo:
 
 def layout(environ, start_response):
     """
-        index function:
-            Lógica para a rota index
+        layout function:
+            Retorna o layout dos html
     """
     template = open('src/templates/layout.html')
     html = str.encode(template.read())

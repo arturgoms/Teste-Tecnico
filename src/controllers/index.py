@@ -1,6 +1,6 @@
 """ Index Controller
 
-    Arquivo onde se encontra toda a lógica que rodará na rota '/'
+    Arquivo onde se encontra toda a lógica que rodará na rota '/index'
 
 Todo:
 

@@ -1,6 +1,6 @@
-""" Index Controller
+""" About Controller
 
-    Arquivo onde se encontra toda a lógica que rodará na rota '/'
+    Arquivo onde se encontra toda a lógica que rodará na rota '/about'
 
 Todo:
 
@@ -10,8 +10,8 @@ Todo:
 
 def about(environ, start_response):
     """
-        index function:
-            Lógica para a rota index
+        about function:
+            Lógica para a rota about
     """
     template = open('src/templates/about.html')
     html = str.encode(template.read())
