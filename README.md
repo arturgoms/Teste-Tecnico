@@ -43,6 +43,29 @@ Ativar o Virtualenv:
 . venv/bin/activate
 ```
 
+Editar o arquivo settings.py com as configurações do seu banco de dados:
+```
+DATABASE = {
+  'user': 'usuario',
+  'password': 'senha',
+  'host': '127.0.0.1',
+  'database': 'nome_do_banco',
+  'raise_on_warnings': True,
+  'use_pure': False,
+}
+```
+
+Criar tabela 'users' dentro do banco, seguindo o modelo do models/user.sql:
+```
+CREATE TABLE IF NOT EXISTS user.users(                            
+    -> id INT NOT NULL AUTO_INCREMENT,
+    -> nome varchar(50) NOT NULL, 
+    -> sobrenome varchar(50) NOT NULL, 
+    -> endereco varchar(100) NOT NULL,
+    -> PRIMARY KEY(id)
+    -> );
+```
+
 Executar aplicação:
 ```
 python3 manage.py
@@ -61,3 +84,12 @@ Foi utilizado:
 - Virtualenv (ambiente virtual pra desenvolver aplicações em python).
 - [Python connector to MySQL (MacOS)](https://dev.mysql.com/downloads/file/?id=472642)
 - [MySQL (MacOS)](https://dev.mysql.com/downloads/file/?id=475582)
+
+Funcionalidades:
+
+- Single page application
+- Estrutura MVC feita a mão com WSGI
+- API com GET POST PUT e DELETE
+- MySQL como Banco de dados        
+- Retorno de erros vindo do servidor
+- Alertas com mensagens de errors
