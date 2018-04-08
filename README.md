@@ -52,6 +52,8 @@ python3 manage.py
 
 ## Sobre o projeto
 
+<img src="https://preview.ibb.co/kzgzux/Screen_Shot_2018_04_08_at_00_09_02.png" width="400"><img src="https://preview.ibb.co/dAVESH/Screen_Shot_2018_04_08_at_00_09_16.png" width="400">
+
 Foi utilizado:
 
 - Python 3.6
