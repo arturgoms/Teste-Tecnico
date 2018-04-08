@@ -1,6 +1,7 @@
 $(document).ready(function () {
+    homePage();
     updateTable();
-    setInterval(updateTable, 1000);
+    setInterval(updateTable, 500);
 
 });
 
@@ -16,13 +17,20 @@ function updateTable() {
                 userList += '<td>'+value["nome"]+'</td>';
                 userList += '<td>'+value["sobrenome"]+'</td>';
                 userList += '<td>'+value["endereco"]+'</td>';
-                userList += '<td><a id="showUpdateField" onclick="showUpdateField('+ key + ');" class="submit btn">Editar</a>&nbsp<a onclick="deleteField('+ key +');" class="submit btn">Deletar</a></td>';
+                userList += '<td><a id="showUpdateField" onclick="showUpdateField('+ key + ');" class="btn editar">Editar</a><a id="delete" onclick="deleteField('+ key +');" class="btn deletar">Deletar</a></td>';
                 userList += '</tr>';    
             });
             $('#tabela').html(userList);
         },
         error: function(result) {
-
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível atualizar a tabela");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
         }
     });
 }
@@ -39,10 +47,14 @@ function addField() {
             endereco:endereco
         },
         success: function (response) {
-            
+            $("#addNome").val('');
+            $("#addSobrenome").val('');
+            $("#addEndereco").val('');
+            $('#alerta').hide("fade", { direction: "right" }, 100);
         },
         error: function(result) {
-            // Do something with the result
+            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+            $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
     return false;
@@ -55,11 +67,12 @@ function deleteField(id){
         data: {
             id:id
         },
-        success: function(result) {
-            // Do something with the result
+        success: function (response) {
+            $('#alerta').hide("fade", { direction: "right" }, 100);
         },
         error: function(result) {
-            // Do something with the result
+            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+            $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
 }
@@ -74,10 +87,12 @@ function showUpdateField(id){
             $('#updateNome').val(dados[id]['nome']);
             $('#updateSobrenome').val(dados[id]['sobrenome']);
             $('#updateEndereco').val(dados[id]['endereco']);
-            $('#updateField').show("fade", { direction: "right" }, 100);
+            $('#updateField').show("fade", { direction: "right" }, 300);
+            $('#alerta').hide("fade", { direction: "right" }, 100);
         },
         error: function(result) {
-
+                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
+                $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
     
@@ -97,13 +112,43 @@ function updateField(){
             sobrenome:sobrenome,
             endereco:endereco
         },
-        success: function(response) {
-         //...
+        success: function (response) {
+            $('#alerta').hide("fade", { direction: "right" }, 100);
         },
         error: function(result) {
-            // Do something with the result
+            $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+            $('#alerta').show("fade", { direction: "right" }, 100);
         }
     });
     $('#updateField').hide("fade", { direction: "right" }, 100);
 return false;
+}
+
+function aboutPage(){
+    $.ajax({
+        type: 'GET',
+        url: 'about',
+        success: function (response) {
+            $('#content').html(response);
+        },
+        error: function(result) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+        }
+    });
+    
+}
+function homePage(){
+    $.ajax({
+        type: 'GET',
+        url: 'index',
+        success: function (response) {
+            $('#content').html(response);
+        },
+        error: function(result) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível mostrar os campos de edição");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+        }
+    });
+    
 }

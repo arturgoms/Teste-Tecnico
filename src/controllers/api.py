@@ -15,7 +15,7 @@ import src.models.mysql as mysql
 def getFields(environ):
         """
         getFields function:
-            retorna os campos que chegam pelos metodos POST DELETE PUT
+            retorna os campos que chegam pelos métodos POST DELETE PUT
         """
         data_env = environ.copy()
         data_env['QUERY_STRING'] = ''
@@ -32,27 +32,50 @@ def api(environ, start_response):
             Lógica para a rota api
     """
     
-    # Metodo POST, adiciona um contato no banco
+    # Método POST, adiciona um contato no banco
     if environ['REQUEST_METHOD'] == 'POST':
-        post = getFields(environ)
-        db = mysql.MySQL()
-        db.insert('users', {"nome":post['nome'].value, "sobrenome":post['sobrenome'].value, "endereco":post['endereco'].value })
+        try:
+            post = getFields(environ)
+            db = mysql.MySQL()
+            db.insert('users', {"nome":post['nome'].value, "sobrenome":post['sobrenome'].value, "endereco":post['endereco'].value })
+            start_response('200 OK', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"true"}))]
+        except Exception as e:
+            start_response('500 ERROR', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"false","error": 500,"method": "POST", "msg": "Não foi possível adicionar contato"}))]
 
-    # Metodo DELETE, deleta um contato do banco
+    # Método DELETE, deleta um contato do banco
     if environ['REQUEST_METHOD'] == 'DELETE':
-        delete = getFields(environ)
-        db = mysql.MySQL()
-        db.delete_where('users', 'id = {}'.format(delete['id'].value))
-
-    # Metodo PUT, atualiza um contato 
+        try:
+            delete = getFields(environ)
+            db = mysql.MySQL()
+            db.delete_where('users', 'id = {}'.format(delete['id'].value))
+            start_response('200 OK', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"true"}))]
+        except Exception as e:
+            start_response('500 ERROR', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"false","error": 500,"method": "DELETE", "msg": "Não foi possível deletar contato"}))]
+        
+    # Método PUT, atualiza um contato 
     if environ['REQUEST_METHOD'] == 'PUT':
-        put = getFields(environ)
-        db = mysql.MySQL()
-        db.update_where('users',"nome = '"+ put['nome'].value +"', sobrenome = '"+ put['sobrenome'].value +"', endereco = '"+ put['endereco'].value + "'", 'id = ' + put['id'].value)
+        try:
+            put = getFields(environ)
+            db = mysql.MySQL()
+            db.update_where('users',"nome = '"+ put['nome'].value +"', sobrenome = '"+ put['sobrenome'].value +"', endereco = '"+ put['endereco'].value + "'", 'id = ' + put['id'].value)
+            start_response('200 OK', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"true"}))]
+        except Exception as e:
+            start_response('500 ERROR', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"false","error": 500,"method": "PUT", "msg": "Não foi possível atualizar contato"}))]
 
     # Método GET, retorna todos os contatos no banco
-    db = mysql.MySQL()
-    json_data = db.select('users')
-    html = str.encode(json.dumps(json_data))
-    start_response('200 OK', [('Content-Type', 'text/json')])
-    return [html]
+    if environ['REQUEST_METHOD'] == 'GET':
+        try:
+            db = mysql.MySQL()
+            json_data = db.select('users')
+            html = str.encode(json.dumps(json_data))
+            start_response('200 OK', [('Content-Type', 'text/json')])
+            return [html]
+        except Exception as e:
+            start_response('500 ERROR', [('Content-Type', 'text/json')])
+            return [str.encode(json.dumps({"success":"false","error": 500,"method": "GET", "msg": "Não foi possível retornar tabela"}))]

@@ -1,17 +1,9 @@
-<html>
-  <head>
-    <title>Home</title>
-    <meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
-    <link rel="stylesheet" type="text/css" href="/css/style.css"/>
-  </head>
-  <body>
-    <h1 class="title">Teste Técnico</h1>
-    <div class="container">
+<div class="container">
     <table border="1" width="500">
         <thead>
             <tr>
                 <th>Nome</th>
-                <th>Sobre Nome</th>
+                <th>Sobrenome</th>
                 <th>Endereço</th>
                 <th>Ação</th>
             </tr>
@@ -20,27 +12,29 @@
         </tbody>
     </table>
     </div>
+
     <div class="container">
-      <p> Adicionar campo</p>
-      <form onsubmit="return addField();" autocomplete="on">
-        <input id="addNome" type="text" name="nome" placeholder="João" autocomplete='given-name' required>
-        <input id="addSobrenome" type="text" name="sobrenome" placeholder="Silva" autocomplete='family-name' required>
-        <input id="addEndereco" type="text" name="endereco" placeholder="Curitiba" autocomplete='street-address' required>
-        <input class="submit btn" name="submit_form" type="submit" value="Submit">
-      </form>
-    </div>
-    <div class="container" id="updateField" style="display: none;">
-        <p>Atualizar campo</p>
+      <div id="alerta" class="alert">
+        <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span> 
+        <div id="message" class="message"><strong>ERROR:</strong> Não foi possível atualizar a tabela</div>
+      </div>
+      <div class="card">
+        <h3> Adicionar contato</h3>
+        <form onsubmit="return addField();" autocomplete="on">
+          <input id="addNome" type="text" name="nome" placeholder="João" autocomplete='given-name' required>
+          <input id="addSobrenome" type="text" name="sobrenome" placeholder="Silva" autocomplete='family-name' required>
+          <input id="addEndereco" type="text" name="endereco" placeholder="Curitiba" autocomplete='street-address' required>
+          <input class="btn submit" name="submit_form" type="submit" value="Submit">
+        </form>
+      </div>
+      <div class="card" id="updateField" style="display: none;">
+        <h3> Atualizar contato</h3>
         <form onsubmit="return updateField();">
         <input id="updateId" type="text" name="id" placeholder="1" style="display: none;" required>
         <input id="updateNome" type="text" name="nome" placeholder="João" required>
         <input id="updateSobrenome" type="text" name="sobrenome" placeholder="Silva" required>
         <input id="updateEndereco" type="text" name="endereco" placeholder="Curitiba" required>
-        <input class="submit btn" name="submit_form" type="submit" value="Submit">
+        <input class="btn submit" name="submit_form" type="submit" value="Submit">
       </form>
     </div>
-  </body>
-  <script src="//code.jquery.com/jquery-1.11.2.min.js"></script>
-  <script src='http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.5/jquery-ui.min.js'></script>
-  <script src="/js/main.js"></script>
-</html>
+    </div>
