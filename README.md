@@ -57,7 +57,7 @@ DATABASE = {
 
 Criar tabela 'users' dentro do banco, seguindo o modelo do models/user.sql:
 ```
-CREATE TABLE IF NOT EXISTS user.users(                            
+CREATE TABLE IF NOT EXISTS nome_do_banco.users(                            
     -> id INT NOT NULL AUTO_INCREMENT,
     -> nome varchar(50) NOT NULL, 
     -> sobrenome varchar(50) NOT NULL, 
