@@ -6,6 +6,17 @@ $(document).ready(function () {
 });
 
 /*
+    Função que muda o estado do botão entre habilitado e desabilitado
+*/
+(function($) {
+    $.fn.toggleDisabled = function(){
+        return this.each(function(){
+            this.disabled = !this.disabled;
+        });
+    };
+})(jQuery);
+
+/*
     Função que atualiza os dados da tabela
 */
 function updateTable() {
@@ -117,7 +128,7 @@ function showUpdateField(id){
             $('#updateEndereco').val(dados[id]['endereco']);
             $('#updateField').toggle("fade", { direction: "right" }, 300);
             $('#alerta').hide("fade", { direction: "right" }, 100);
-            $("#delete_"+id).prop("disabled",true);
+            $("#delete_"+id).toggleDisabled();
         },
         error: function(result) {
             try {
@@ -185,7 +196,6 @@ function checkChanges(){
             });
             if(fieldsCount != dataDB){
                 fieldsCount = dataDB;
-
                 $('#updateField').hide("fade", { direction: "right" }, 300);
                 updateTable();
             }
