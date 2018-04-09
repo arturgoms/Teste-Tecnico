@@ -12,7 +12,7 @@ import os
 
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 STATIC_URL = 'src/static/'
-PORT = 3000
+PORT = 4000
 DATABASE = {
   'user': 'root',
   'password': 'pwarturgomes',

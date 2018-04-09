@@ -17,10 +17,11 @@ function updateTable() {
                 userList += '<td>'+value["nome"]+'</td>';
                 userList += '<td>'+value["sobrenome"]+'</td>';
                 userList += '<td>'+value["endereco"]+'</td>';
-                userList += '<td><a id="showUpdateField" onclick="showUpdateField('+ key + ');" class="btn editar">Editar</a><a id="delete" onclick="deleteField('+ key +');" class="btn deletar">Deletar</a></td>';
+                userList += '<td><button id="showUpdateField" onclick="showUpdateField('+ key + ');" class="btn editar">Editar</button><button id="delete_'+key+'" onclick="deleteField('+ key +');" class="btn deletar">Deletar</button></td>';
                 userList += '</tr>';    
             });
             $('#tabela').html(userList);
+            $('#tabela').show("fade", { direction: "right" }, 100);
         },
         error: function(result) {
             try {
@@ -111,8 +112,9 @@ function showUpdateField(id){
             $('#updateNome').val(dados[id]['nome']);
             $('#updateSobrenome').val(dados[id]['sobrenome']);
             $('#updateEndereco').val(dados[id]['endereco']);
-            $('#updateField').show("fade", { direction: "right" }, 300);
+            $('#updateField').toggle("fade", { direction: "right" }, 300);
             $('#alerta').hide("fade", { direction: "right" }, 100);
+            $("#delete_"+id).prop("disabled",true);
         },
         error: function(result) {
             try {
@@ -147,6 +149,7 @@ function updateField(){
         },
         success: function (response) {
             $('#alerta').hide("fade", { direction: "right" }, 100);
+            $("#delete_"+id).prop("disabled",false);
             updateTable();
         },
         error: function(result) {

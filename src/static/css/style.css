@@ -78,6 +78,7 @@ body{
 	-webkit-transform: translate(0px, 2px);
 	box-shadow: 0px 1px 0px 0px;
 }
+
 .btn.editar{
 	background-color: #55acee;
   	box-shadow: 0px 5px 0px 0px #3C93D5;
@@ -85,6 +86,7 @@ body{
 .btn.editar:hover{
 	background-color: #6FC6FF;
 }
+
 .btn.deletar{
 	background-color: #e74c3c;
 	box-shadow: 0px 5px 0px 0px #CE3323;	
@@ -92,6 +94,11 @@ body{
 .btn.deletar:hover{
 	background-color: #FF6656;
 }
+.btn.deletar:disabled {
+	background-color: #e74c3cad !important;
+	box-shadow: 0px 5px 0px 0px #e74c3cad !important;	
+}
+
 .btn.submit{
 	background-color: #2ecc71;
 	box-shadow: 0px 5px 0px 0px #2db868;
@@ -99,6 +106,8 @@ body{
 .btn.submit:hover{
 	 background-color: #48E68B;
 }
+
+/* Navbar */
 .nav {
   text-align: center;
   list-style: none;
@@ -130,7 +139,7 @@ body{
 }
 
 .card{
-	padding: 30px;
+	padding: 10px;
 }
 
 /* Alerta de erro */

@@ -66,6 +66,8 @@ CREATE TABLE IF NOT EXISTS nome_do_banco.users(
     -> );
 ```
 
+Instalar o MySQL e Python connector MySQL para seu sistema operacional
+
 Executar aplicação:
 ```
 python3 manage.py
