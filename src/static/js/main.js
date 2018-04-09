@@ -1,5 +1,8 @@
+var fieldsCount;
+
 $(document).ready(function () {
     homePage();
+    setInterval(checkChanges, 1000 );
 });
 
 /*
@@ -165,6 +168,40 @@ function updateField(){
     });
     $('#updateField').hide("fade", { direction: "right" }, 100);
 return false;
+}
+
+/*
+    Função que verifica se houve atualização no banco de dados
+*/
+function checkChanges(){
+     $.ajax({
+        type: 'GET',
+        url: 'api',
+        success: function (response) {
+            dados = $.parseJSON(response);
+            var dataDB  = 0;
+            $.each(dados, function(key, value) { 
+                dataDB = key;
+            });
+            if(fieldsCount != dataDB){
+                fieldsCount = dataDB;
+
+                $('#updateField').hide("fade", { direction: "right" }, 300);
+                updateTable();
+            }
+
+        },
+        error: function(result) {
+            try {
+                $('#message').html("<strong>ERROR:</strong> " + result['responseJSON']['msg']);
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+            catch(err) {
+                $('#message').html("<strong>ERROR:</strong> Não foi possível procurar por mudanças no banco de dados (Servidor Offline)");
+                $('#alerta').show("fade", { direction: "right" }, 100);
+            }
+        }
+    });
 }
 
 /*
