@@ -7,9 +7,9 @@ Todo:
 
 """
 
+import json
 import mysql.connector as mysql
 import src.settings as conf
-import json
 
 class MySQL():
 	"""
