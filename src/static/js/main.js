@@ -1,4 +1,4 @@
-var fieldsCount;
+var fieldsCheck = 0;
 
 $(document).ready(function () {
     homePage();
@@ -189,17 +189,13 @@ function checkChanges(){
         type: 'GET',
         url: 'api',
         success: function (response) {
-            dados = $.parseJSON(response);
-            var dataDB  = 0;
-            $.each(dados, function(key, value) { 
-                dataDB = key;
-            });
-            if(fieldsCount != dataDB){
-                fieldsCount = dataDB;
+            var dados = $.parseJSON(response);
+            if($.param(dados) != $.param(fieldsCheck)){
+                console.log('atualiza tabela')
+                fieldsCheck = dados;
                 $('#updateField').hide("fade", { direction: "right" }, 300);
                 updateTable();
             }
-
         },
         error: function(result) {
             try {
