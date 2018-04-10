@@ -37,7 +37,7 @@ def api(environ, start_response):
         try:
             post = getFields(environ)
             db = mysql.MySQL()
-            db.insert('users', {"nome":post['nome'].value, "sobrenome":post['sobrenome'].value, "endereco":post['endereco'].value })
+            db.insert({"nome":post['nome'].value, "sobrenome":post['sobrenome'].value, "endereco":post['endereco'].value })
             start_response('200 OK', [('Content-Type', 'text/json')])
             return [str.encode(json.dumps({"success":"true"}))]
         except Exception as e:
@@ -49,19 +49,19 @@ def api(environ, start_response):
         try:
             delete = getFields(environ)
             db = mysql.MySQL()
-            db.delete_where('users', 'id = {}'.format(delete['id'].value))
+            db.delete_where((delete['id'].value))
             start_response('200 OK', [('Content-Type', 'text/json')])
             return [str.encode(json.dumps({"success":"true"}))]
         except Exception as e:
             start_response('500 ERROR', [('Content-Type', 'text/json')])
-            return [str.encode(json.dumps({"success":"false","error": 500,"method": "DELETE", "msg": "Não foi possível deletar contato"}))]
+            return [str.encode(json.dumps({"success":"false","error": 500,"method": "DELETE", "msg": "Não foi possível deletar contato"}))] 
         
     # Método PUT, atualiza um contato 
     if environ['REQUEST_METHOD'] == 'PUT':
         try:
             put = getFields(environ)
             db = mysql.MySQL()
-            db.update_where('users',"nome = '"+ put['nome'].value +"', sobrenome = '"+ put['sobrenome'].value +"', endereco = '"+ put['endereco'].value + "'", 'id = ' + put['id'].value)
+            db.update_where([put['nome'].value,put['sobrenome'].value,put['endereco'].value], put['id'].value)
             start_response('200 OK', [('Content-Type', 'text/json')])
             return [str.encode(json.dumps({"success":"true"}))]
         except Exception as e:
@@ -72,10 +72,12 @@ def api(environ, start_response):
     if environ['REQUEST_METHOD'] == 'GET':
         try:
             db = mysql.MySQL()
-            json_data = db.select('users')
+            json_data = db.select()
             html = str.encode(json.dumps(json_data))
             start_response('200 OK', [('Content-Type', 'text/json')])
             return [html]
         except Exception as e:
             start_response('500 ERROR', [('Content-Type', 'text/json')])
             return [str.encode(json.dumps({"success":"false","error": 500,"method": "GET", "msg": "Não foi possível retornar tabela"}))]
+
+

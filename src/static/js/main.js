@@ -191,7 +191,6 @@ function checkChanges(){
         success: function (response) {
             var dados = $.parseJSON(response);
             if($.param(dados) != $.param(fieldsCheck)){
-                console.log('atualiza tabela')
                 fieldsCheck = dados;
                 $('#updateField').hide("fade", { direction: "right" }, 300);
                 updateTable();
